@@ -72,7 +72,7 @@ export function TopBar() {
         </button>
         <Link to="/app/workspace" className="flex items-center gap-2 text-lg font-semibold text-slate-800 dark:text-slate-100">
           {theme === 'octopus' && <OctopusIcon className="h-6 w-6 shrink-0" />}
-          Study Hub
+          Workroom
         </Link>
       </div>
       <div className="flex items-center gap-4">

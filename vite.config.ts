@@ -12,8 +12,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
-        name: 'Study Hub',
-        short_name: 'StudyHub',
+        name: 'Workroom',
+        short_name: 'Workroom',
         description: 'Organise, study, and focus in one place. Files, timers, flashcards, and music — all in your browser.',
         theme_color: '#2563eb',
         background_color: '#ffffff',

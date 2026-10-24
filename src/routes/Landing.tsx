@@ -50,7 +50,7 @@ const FEATURES = [
   {
     id: 'themes',
     title: 'Themes',
-    description: 'Choose how Study Hub looks. Light, Dark, Cyberpunk, Octopus, Pip-Boy, or Lofi.',
+    description: 'Choose how Workroom looks. Light, Dark, Cyberpunk, Octopus, Pip-Boy, or Lofi.',
     studentHelp:
       'Find a theme that matches your vibe. Dark for late-night cramming, Lofi for a cosy feel, or something bold when you need that extra motivation.',
     icon: '🎨',
@@ -372,7 +372,7 @@ export function Landing() {
         <section className="animate-landing-intro text-center">
           <h1 className="flex items-center justify-center gap-3 text-4xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-5xl">
             {theme === 'octopus' && <OctopusIcon className="h-10 w-10 shrink-0 sm:h-12 sm:w-12" />}
-            Study Hub
+            Workroom
           </h1>
           <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
             Organise, study, and focus in one place. Files, timers, flashcards,

@@ -180,7 +180,7 @@ export function AdminDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
-            <p className="mt-0.5 text-sm text-slate-400">Study Hub user management</p>
+            <p className="mt-0.5 text-sm text-slate-400">Workroom user management</p>
           </div>
           <button
             type="button"

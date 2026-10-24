@@ -1,8 +1,8 @@
-# Study Hub
+# Workroom
 
 > Organise, study, and focus in one place. Files, timers, flashcards, and music — all in your browser.
 
-**Live demo:** [study-hub-aston-hack11.vercel.app](https://study-hub-aston-hack11.vercel.app)
+**Live demo:** [workroom-astonhack11.vercel.app](https://workroom-astonhack11.vercel.app)
 
 Originally built at AstonHack 11 (24-hour hackathon at Aston University). Since the hackathon, the project has been significantly extended with a full backend, cloud sync, AI-powered flashcard generation, a test suite, and PWA support.
 
@@ -123,7 +123,7 @@ Originally built at AstonHack 11 (24-hour hackathon at Aston University). Since 
                   │ HTTPS + Bearer token
                   ▼
 ┌─────────────────────────────────────────┐
-│       Spring Boot 3.5 (Fly.io)          │
+│       Spring Boot 3.5 (Render)          │
 │                                         │
 │  /api/auth  →  AuthController           │
 │  /api/sync  →  SyncController           │
@@ -155,8 +155,8 @@ Originally built at AstonHack 11 (24-hour hackathon at Aston University). Since 
 **Frontend**
 
 ```bash
-git clone https://github.com/WJ-42/StudyHub-AstonHack11
-cd StudyHub-AstonHack11
+git clone https://github.com/WJ-42/Workroom-AstonHack11
+cd Workroom-AstonHack11
 npm install
 cp .env.example .env
 # Set VITE_API_URL=https://studyhub-backend-98ag.onrender.com in .env
@@ -166,8 +166,8 @@ npm run dev
 **Backend**
 
 ```bash
-git clone https://github.com/WJ-42/studyhub-backend
-cd studyhub-backend
+git clone https://github.com/WJ-42/workroom-backend
+cd workroom-backend
 # Set environment variables: DATABASE_URL, JWT_SECRET, ANTHROPIC_API_KEY
 mvn spring-boot:run
 ```
@@ -193,7 +193,7 @@ This project was originally created at AstonHack 11 with one teammate. The divis
 - Rotated a leaked YouTube API key and fixed git history
 - Migrated deployment from Netlify to Vercel, fixed base path config
 - Built out the full backend from the skeleton: Spring Security, JWT auth, BCrypt hashing, all REST endpoints, CORS config, JPA entities and repositories
-- Deployed backend to Fly.io with Neon Postgres as the database
+- Deployed backend to Render with Neon Postgres as the database
 - Wired up the frontend auth flow: AuthContext, JWT token management, login/register modal, cloud sync
 - Built the AI flashcard generation feature end to end: Anthropic API integration in the backend, rate limiting, frontend modal with card preview and selection
 - Set up Vitest + React Testing Library with 34 tests covering the API layer, auth, and UI components
