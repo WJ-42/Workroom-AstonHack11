@@ -178,22 +178,52 @@ export async function getCards(deckId: string): Promise<Flashcard[]> {
   return all.filter((x) => x.deckId === deckId)
 }
 
+// Flashcard writes announce themselves so cloud sync can follow along
+// without every caller having to know about it.
+export type FlashcardChange =
+  | { type: 'upsert' }
+  | { type: 'deleteDeck'; id: string }
+  | { type: 'deleteCard'; id: string }
+
+const flashcardListeners = new Set<(change: FlashcardChange) => void>()
+
+export function onFlashcardChange(listener: (change: FlashcardChange) => void): () => void {
+  flashcardListeners.add(listener)
+  return () => {
+    flashcardListeners.delete(listener)
+  }
+}
+
+function emitFlashcardChange(change: FlashcardChange): void {
+  for (const listener of flashcardListeners) {
+    try {
+      listener(change)
+    } catch (err) {
+      console.warn('Flashcard change listener failed:', err)
+    }
+  }
+}
+
 export async function saveDeck(deck: FlashcardDeck): Promise<void> {
   await idbPut(STORE, deck)
+  emitFlashcardChange({ type: 'upsert' })
 }
 
 export async function deleteDeck(deckId: string): Promise<void> {
   const cards = await getCards(deckId)
   for (const c of cards) await idbDelete(STORE, c.id)
   await idbDelete(STORE, deckId)
+  emitFlashcardChange({ type: 'deleteDeck', id: deckId })
 }
 
 export async function saveCard(card: Flashcard): Promise<void> {
   await idbPut(STORE, card)
+  emitFlashcardChange({ type: 'upsert' })
 }
 
 export async function deleteCard(cardId: string): Promise<void> {
   await idbDelete(STORE, cardId)
+  emitFlashcardChange({ type: 'deleteCard', id: cardId })
 }
 
 // Removes all deck and card entries from local IDB.

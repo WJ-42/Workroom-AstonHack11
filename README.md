@@ -60,7 +60,9 @@ Originally built at AstonHack 11 (24-hour hackathon at Aston University). Since 
 **Auth and Cloud Sync**
 - Register and log in with email and password
 - JWT-based authentication
-- Flashcard decks and notes sync to the cloud
+- Flashcard decks and cards sync to the cloud while you are logged in: edits are pushed shortly after you make them, deletes go through straight away, and anything unsaved is pushed before logout
+- Decks made as a guest are added to your account when you log in, and a different account never inherits them
+- Notes are stored in the browser only for now
 - Guest mode available with local-only storage
 
 **PWA Support**

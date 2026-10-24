@@ -31,6 +31,14 @@ export async function syncToCloud(data: SyncRequest): Promise<void> {
   await api.post('/api/sync', data);
 }
 
+export async function deleteDeckInCloud(clientId: string): Promise<void> {
+  await api.delete(`/api/sync/decks/${encodeURIComponent(clientId)}`);
+}
+
+export async function deleteCardInCloud(clientId: string): Promise<void> {
+  await api.delete(`/api/sync/cards/${encodeURIComponent(clientId)}`);
+}
+
 export async function fetchDecks(): Promise<DeckDto[]> {
   return api.get<DeckDto[]>('/api/sync/decks');
 }
