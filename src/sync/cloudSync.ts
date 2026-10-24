@@ -9,6 +9,7 @@ import {
   type FlashcardChange,
 } from '../store/study'
 import { lsGet, lsRemove, lsSet } from '../store/storage'
+import { isAuthError } from '../api/client'
 import {
   deleteCardInCloud,
   deleteDeckInCloud,
@@ -167,6 +168,8 @@ export async function reconcileOnLogin(email: string): Promise<void> {
         }
       }
     } catch (err) {
+      // A rejected token has to reach the caller so it can log the user out.
+      if (isAuthError(err)) throw err
       // Cloud unreachable: keep local data and let the next push catch up.
       console.warn('Could not load flashcards from cloud:', err)
     }

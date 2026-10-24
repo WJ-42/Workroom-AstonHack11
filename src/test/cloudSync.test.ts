@@ -184,6 +184,17 @@ describe('reconcileOnLogin', () => {
     expect(localStorage.getItem(OWNER_KEY)).toBe('me@example.com')
   })
 
+  it('passes a rejected token back to the caller and leaves local data alone', async () => {
+    const { ApiError } = await import('@/api/client')
+    await addLocalDeck('d1', ['c1'])
+    vi.mocked(api.fetchDecks).mockRejectedValue(new ApiError('Unauthorized', 401))
+
+    await expect(sync.reconcileOnLogin('me@example.com')).rejects.toMatchObject({ status: 401 })
+
+    expect((await store.getDecks()).map((d) => d.id)).toEqual(['d1'])
+    expect(localStorage.getItem(OWNER_KEY)).toBeNull()
+  })
+
   it('does not trigger pushes for its own writes', async () => {
     sync.startCloudSync()
     vi.mocked(api.fetchDecks).mockResolvedValue([

@@ -44,11 +44,26 @@ async function request<T>(
         message = text;
       }
     }
-    throw new Error(message);
+    throw new ApiError(message, response.status);
   }
 
   const text = await response.text();
   return text ? JSON.parse(text) : null;
+}
+
+export class ApiError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
+
+// True when the server rejected our token, as opposed to being unreachable.
+export function isAuthError(err: unknown): boolean {
+  return err instanceof ApiError && (err.status === 401 || err.status === 403);
 }
 
 export const api = {
