@@ -40,6 +40,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg}'],
+        // The social preview image is only for link scrapers, no need to cache it for every visitor.
+        globIgnores: ['**/og-image.png'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/studyhub-backend-98ag\.onrender\.com\/.*/i,
